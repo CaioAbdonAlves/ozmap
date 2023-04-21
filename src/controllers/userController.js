@@ -8,3 +8,10 @@ exports.getUsers = async (ctx) => {
     ctx.status = 200;
     ctx.body = users;
 };
+
+exports.getUserById = async (ctx) => {
+    const { id } = ctx.params;
+    const user = await userModel.getUserById(id);
+    ctx.status = 200;
+    ctx.body = user;
+};
