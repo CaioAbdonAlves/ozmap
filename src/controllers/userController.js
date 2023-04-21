@@ -22,8 +22,8 @@ exports.getUserById = async (ctx) => {
 };
 
 exports.createUser = async (ctx) => {
-    const { name, email } = ctx.request.body;
-    const newUser = await userModel.createUser(name, email);
+    const { name, email, password } = ctx.request.body;
+    const newUser = await userModel.createUser(name, email, password);
     ctx.status = 201;
     ctx.body = newUser;
 };
