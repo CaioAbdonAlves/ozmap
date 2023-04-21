@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/CaioAbdonAlves/ozmap#readme",
   "dependencies": {
+    "@koa/cors": "^4.0.0",
     "chai": "^4.3.7",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.0",
