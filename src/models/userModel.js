@@ -23,3 +23,15 @@ exports.getUserById = (id) => {
         });
     });
 };
+
+exports.createUser = (name, email) => {
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO users (name, email) VALUES (?, ?)`;
+        db.run(sql, [name, email], function (err) {
+            if (err) {
+                reject(err);
+            }
+            resolve({ id: this.lastID, name, email });
+        });
+    });
+};
