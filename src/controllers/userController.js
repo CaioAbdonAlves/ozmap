@@ -12,6 +12,11 @@ exports.getUsers = async (ctx) => {
 exports.getUserById = async (ctx) => {
     const { id } = ctx.params;
     const user = await userModel.getUserById(id);
+    if (!user) {
+        ctx.status = 404;
+        ctx.body = { message: `O usuário com o id ${id} não foi encontrado` };
+        return;
+    }
     ctx.status = 200;
     ctx.body = user;
 };
