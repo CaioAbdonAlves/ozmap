@@ -27,3 +27,16 @@ exports.createUser = async (ctx) => {
     ctx.status = 201;
     ctx.body = newUser;
 };
+
+exports.updateUser = async (ctx) => {
+    const { id } = ctx.params;
+    const { name, email, password } = ctx.request.body;
+    const updatedUser = await userModel.updateUser(id, name, email, password);
+    if (!updatedUser) {
+        ctx.status = 404;
+        ctx.body = { message: `O usuário com o id: ${id} não foi encontrado.` };
+        return;
+    }
+    ctx.status = 200;
+    ctx.body = updatedUser;
+};
