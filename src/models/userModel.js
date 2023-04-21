@@ -47,3 +47,15 @@ exports.updateUser = (id, name, email) => {
         });
     });
 };
+
+exports.deleteUser = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = `DELETE FROM users WHERE id= ?`;
+        db.run(sql, [id], function (err) {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    });
+};
