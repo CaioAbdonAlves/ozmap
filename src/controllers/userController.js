@@ -40,3 +40,14 @@ exports.updateUser = async (ctx) => {
     ctx.status = 200;
     ctx.body = updatedUser;
 };
+
+exports.deleteUser = async (ctx) => {
+    const { id } = ctx.params;
+    const result = await userModel.deleteUser(id);
+    if(!result) {
+        ctx.status = 404;
+        ctx.body = { message: `O usuário com o id: ${id} não foi encontrado.` };
+        return;
+    }
+    ctx.status = 204;
+}
