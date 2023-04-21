@@ -35,3 +35,15 @@ exports.createUser = (name, email) => {
         });
     });
 };
+
+exports.updateUser = (id, name, email) => {
+    return new Promise((resolve, reject) => {
+        const sql = `UPDATE users SET name= ?, email= ? WHERE id = ?`;
+        db.run(sql, [name, email, id], function (err) {
+            if (err) {
+                reject(err);
+            }
+            resolve({ id, name, email });
+        });
+    });
+};
