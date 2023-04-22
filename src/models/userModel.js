@@ -24,10 +24,10 @@ exports.getUserById = (id) => {
   });
 };
 
-exports.createUser = (name, email, password) => {
+exports.createUser = (name, email, idade) => {
   return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
-    db.run(sql, [name, email, password], function (err) {
+    const sql = `INSERT INTO users (name, email, idade) VALUES (?, ?, ?)`;
+    db.run(sql, [name, email, idade], function (err) {
       if (err) {
         reject(err);
       }
@@ -36,14 +36,14 @@ exports.createUser = (name, email, password) => {
   });
 };
 
-exports.updateUser = (id, name, email, password) => {
+exports.updateUser = (id, name, email, idade) => {
   return new Promise((resolve, reject) => {
-    const sql = `UPDATE users SET name= ?, email= ?, password= ? WHERE id = ?`;
-    db.run(sql, [name, email, password, id], function (err) {
+    const sql = `UPDATE users SET name= ?, email= ?, idade= ? WHERE id = ?`;
+    db.run(sql, [name, email, idade, id], function (err) {
       if (err) {
         reject(err);
       }
-      resolve({ id, name, email, password });
+      resolve({ id, name, email, idade });
     });
   });
 };

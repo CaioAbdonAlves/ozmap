@@ -22,16 +22,16 @@ exports.getUserById = async (ctx) => {
 };
 
 exports.createUser = async (ctx) => {
-    const { name, email, password } = ctx.request.body;
-    const newUser = await userModel.createUser(name, email, password);
+    const { name, email, idade } = ctx.request.body;
+    const newUser = await userModel.createUser(name, email, idade);
     ctx.status = 201;
     ctx.body = newUser;
 };
 
 exports.updateUser = async (ctx) => {
     const { id } = ctx.params;
-    const { name, email, password } = ctx.request.body;
-    const updatedUser = await userModel.updateUser(id, name, email, password);
+    const { name, email, idade } = ctx.request.body;
+    const updatedUser = await userModel.updateUser(id, name, email, idade);
     if (!updatedUser) {
         ctx.status = 404;
         ctx.body = { message: `O usuário com o id: ${id} não foi encontrado.` };
