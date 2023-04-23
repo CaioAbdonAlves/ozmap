@@ -2,16 +2,17 @@
   "name": "ozmap",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "mocha --timeout 5000 --exit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CaioAbdonAlves/ozmap.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Caio Abdon",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CaioAbdonAlves/ozmap/issues"
@@ -19,13 +20,17 @@
   "homepage": "https://github.com/CaioAbdonAlves/ozmap#readme",
   "dependencies": {
     "@koa/cors": "^4.0.0",
-    "chai": "^4.3.7",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
     "koa-router": "^12.0.0",
-    "mocha": "^10.2.0",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "chai-json-schema": "^1.5.1",
+    "mocha": "^10.2.0"
   }
 }
