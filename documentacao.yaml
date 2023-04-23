@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: API Usuários OZMap
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Retorna uma lista de usuários
+      parameters:
+        - name: page
+          in: query
+          description: Número da página a ser retornada
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          description: Quantidade de usuários por página
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Lista de usuários retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    idade:
+                      type: integer
+    post:
+      summary: Cria um novo usuário
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                idade:
+                  type: integer
+              required:
+                - name
+                - email
+                - idade
+      responses:
+        "201":
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  idade:
+                    type: integer
+  /users/{userId}:
+    get:
+      summary: Retorna um usuário específico
+      parameters:
+        - name: userId
+          in: path
+          description: ID do usuário a ser retornado
+          schema:
+            type: integer
+          required: true
+      responses:
+        "200":
+          description: Usuário retornado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  idade:
+                    type: integer
+      put:
+        summary: Atualiza um usuário existente
+        parameters:
+          - name: userId
+            in: path
+            description: ID do usuário a ser atualizado
+            schema:
+              type: integer
+            required: true
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  idade:
+                    type: integer
+                required:
+                  - name
+                  - email
+                  - idade
+        responses:
+          "200":
+            description: Usuário atualizado com sucesso
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    idade:
+                      type: integer
+
+    delete:
+      summary: Remove um usuário existente
+      parameters:
+        - name: userId
+          in: path
+          description: ID do usuário a ser removido
+          schema:
+            type: integer
+          required: true
+      responses:
+        "204":
+          description: Usuário removido com sucesso
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        idade:
+          type: integer
+      required:
+        - name
+        - email
+        - idade
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    page:
+      $ref: "#/components/parameters/page"
+    pageSize:
+      $ref: "#/components/parameters/pageSize"
+  examples:
+    UserExample:
+      value:
+        name: John Doe
+        email: john.doe@example.com
+        idade: 21
