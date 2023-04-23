@@ -12,10 +12,10 @@ exports.getAllUsers = (offset, limit) => {
   });
 };
 
-exports.getUserById = (id) => {
+exports.getUserByName = (name) => {
   return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM users WHERE id = ?`;
-    db.get(sql, [id], (err, row) => {
+    const sql = `SELECT * FROM users WHERE name = ?`;
+    db.get(sql, [name], (err, row) => {
       if (err) {
         reject(err);
       }
@@ -29,29 +29,32 @@ exports.createUser = (name, email, idade) => {
     const sql = `INSERT INTO users (name, email, idade) VALUES (?, ?, ?)`;
     db.run(sql, [name, email, idade], function (err) {
       if (err) {
-        reject(err);
+        reject(err);DELETE
       }
-      resolve({ id: this.lastID, name, email });
+      resolve({ id: this.lastID, name, email, idade });
     });
   });
 };
 
 exports.updateUser = (id, name, email, idade) => {
   return new Promise((resolve, reject) => {
-    const sql = `UPDATE users SET name= ?, email= ?, idade= ? WHERE id = ?`;
+    const sql = `UPDATE users SET name= ?, email= ?, idade= ? WHERE name = ?`;
     db.run(sql, [name, email, idade, id], function (err) {
       if (err) {
         reject(err);
+      } else if (this.changes === 0) {
+        reject(new Error(`O usuário com o nome: ${id} não foi encontrado.`));
+      } else {
+        resolve({ id, name, email, idade });
       }
-      resolve({ id, name, email, idade });
     });
   });
 };
 
-exports.deleteUser = (id) => {
+exports.deleteUser = (name) => {
   return new Promise((resolve, reject) => {
-    const sql = `DELETE FROM users WHERE id= ?`;
-    db.run(sql, [id], function (err) {
+    const sql = `DELETE FROM users WHERE name= ?`;
+    db.run(sql, [name], function (err) {
       if (err) {
         reject(err);
       }
