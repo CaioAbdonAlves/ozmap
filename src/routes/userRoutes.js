@@ -6,9 +6,9 @@ const router = new Router({
 });
 
 router.get('/', userController.getUsers);
-router.get('/:id', userController.getUserById);
+router.get('/:name', userController.getUserByName);
 router.post('/', userController.createUser);
 router.put('/:id', userController.updateUser);
-router.del('/:id', userController.deleteUser);
+router.del('/:name', userController.deleteUser);
 
 module.exports = router;
