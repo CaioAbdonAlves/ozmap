@@ -14,8 +14,6 @@ describe('Testes da API de Usuários', () => {
   let userId = null;
 
     describe('Testes de Aplicação', () => {
-    it('deve esperar 2 segundos antes de fazer a solicitação', async () => {
-        await new Promise(resolve => setTimeout(resolve, 2000)); // tempo de espera em milissegundos (2 segundos)
         
         it('O servidor esta online', async () => {
             const res = await chai.request(app).get('/users');
